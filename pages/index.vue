@@ -1,24 +1,21 @@
 <template>
-  <section class="container">
-    <div>
-      <logo/>
-      <h1 class="title">
-        vue-client
-      </h1>
-      <h2 class="subtitle">
-        blog client
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green">Documentation</a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey">GitHub</a>
-      </div>
-    </div>
+  <section class="home">
+    <nav class="home-nav-f"/>
+    <nav class="home-nav">
+      <ul class="home-nav-ul">
+        <div class="avatar"/>
+        <li class="nav-item">发沸点</li>
+        <li class="nav-item">写文章</li>
+        <li class="nav-item">分享链接</li>
+      </ul>
+      <ul class="home-nav-ul">
+        <li>
+          <a
+            class="draft"
+            href="##">草稿</a>
+        </li>
+      </ul>
+    </nav>
   </section>
 </template>
 
@@ -32,34 +29,29 @@ export default {
 }
 </script>
 
-<style>
-.container {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
+<style lang="less">
+.home {
+  margin-right: 15rem;
+  .home-nav {
+    display: flex;
+    justify-content: space-between;
+    background: #fff;
+    .avatar {
+      width: 50px;
+      height: 50px;
+      background: url('~static/img/avatar.jpeg') no-repeat;
+      background-size: 100% 100%;
+    }
+    .home-nav-ul {
+      display: flex;
+      align-items: center;
+      .nav-item {
+        padding: 0 18px;
+      }
+      .draft {
+        padding-right: 15px;
+      }
+    }
+  }
 }
 </style>

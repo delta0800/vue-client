@@ -1,10 +1,45 @@
 <template>
-  <div>
-    <nuxt/>
+  <div id="infun">
+    <v-header/>
+    <section class="main-container">
+      <div class="main">
+        <nuxt/>
+        <div class="main-aside"/>
+      </div>
+    </section>
   </div>
 </template>
+<script>
+import vHeader from '~/components/common/header'
+export default {
+  components: {
+    vHeader
+  }
+}
+</script>
 
-<style>
+
+<style lang="less">
+.main-container {
+  background: #f4f5f5;
+  .main {
+    position: relative;
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
+    height: 1000px;
+    border: 1px solid red;
+    .main-aside {
+      width: 14rem;
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 1;
+      background: yellow;
+      height: 100%;
+    }
+  }
+}
 html {
   font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
     Roboto, 'Helvetica Neue', Arial, sans-serif;
