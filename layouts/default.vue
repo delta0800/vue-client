@@ -22,13 +22,14 @@ export default {
 <style lang="less">
 .main-container {
   background: #f4f5f5;
+  overflow: hidden;
   .main {
     position: relative;
     width: 100%;
     max-width: 960px;
-    margin: 0 auto;
+    margin: 15px auto 0;
     height: 1000px;
-    border: 1px solid red;
+    // border: 1px solid red;
     .main-aside {
       width: 14rem;
       position: absolute;

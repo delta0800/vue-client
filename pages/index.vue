@@ -1,22 +1,5 @@
 <template>
-  <section class="home">
-    <nav class="home-nav-f"/>
-    <nav class="home-nav">
-      <ul class="home-nav-ul">
-        <div class="avatar"/>
-        <li class="nav-item">发沸点</li>
-        <li class="nav-item">写文章</li>
-        <li class="nav-item">分享链接</li>
-      </ul>
-      <ul class="home-nav-ul">
-        <li>
-          <a
-            class="draft"
-            href="##">草稿</a>
-        </li>
-      </ul>
-    </nav>
-  </section>
+  <section class="home"/>
 </template>
 
 <script>

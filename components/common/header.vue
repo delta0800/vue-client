@@ -10,7 +10,7 @@
             <ul class="ul-main">
               <li class="nav-main">
                 <ul class="nav-main-ul">
-                  <li class="nav-item">首页</li>
+                  <li class="nav-item"><nuxt-link to="/home">首页</nuxt-link></li>
                   <li class="nav-item">文章</li>
                   <li class="nav-item">心情</li>
                   <li class="nav-item">标签</li>
