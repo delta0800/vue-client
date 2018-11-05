@@ -70,6 +70,7 @@ module.exports = {
     /*
     ** You can extend webpack config here
     */
+    vendor: ['axios'],
     extend(config, ctx) {
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {

@@ -3,7 +3,6 @@ import SvgIcon from '@/components/common/SvgIcon'
 
 const renderIcon = () => {
   // register globally
-  console.log('icon start')
   Vue.component('svg-icon', SvgIcon)
 
   const requireAll = requireContext => {
@@ -11,7 +10,6 @@ const renderIcon = () => {
   }
 
   const req = require.context('../assets/icons', false, /\.svg$/)
-  console.log(req.keys())
   return requireAll(req)
 }
 
