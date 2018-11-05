@@ -1,8 +1,8 @@
 module.exports = {
   apps: [
     {
-      name: 'vueblog',
-      script: 'server/index.js',
+      name: 'vue-client',
+      script: './server/index.js',
       env: {
         COMMON_VARIABLE: 'true'
       },
