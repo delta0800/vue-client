@@ -11,8 +11,9 @@ export const mutations = {
 }
 export const actions = {
   async getPostList({ commit, rootGetters }) {
+    console.log(axios)
     let { data } = await axios
-      .get(`${rootGetters.baseUrl}/admin/index`)
+      .get('/admin/index')
       .catch(err => console.error(err))
     return data
   }

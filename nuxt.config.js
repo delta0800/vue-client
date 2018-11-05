@@ -54,12 +54,13 @@ module.exports = {
   */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
-    proxy: true
+    proxy: true,
+    debugL: true,
+    baseURL: 'http://localhost:4000'
   },
   proxy: {
     '/admin': {
-      target: 'http://localhost:4000',
-      changeOrigin: true
+      target: 'http://localhost:4000'
     }
   },
   /*
