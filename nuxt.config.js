@@ -35,7 +35,12 @@ module.exports = {
   /*
   ** Global CSS
   */
-  css: ['element-ui/lib/theme-chalk/index.css', '~assets/css/reset.css'],
+  css: [
+    'element-ui/lib/theme-chalk/index.css',
+    '~assets/css/reset.css',
+    '~assets/css/main.css'
+  ],
+  // 使用transition需要创建样式css文件
 
   /*
   ** Plugins to load before mounting the App
@@ -49,13 +54,18 @@ module.exports = {
     // Doc: https://github.com/nuxt-community/axios-module#usage
     '@nuxtjs/axios'
   ],
+
+  /*
+  ** process
+  */
+  loading: { color: '#24292e' },
   /*
   ** Axios module configuration
   */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
     proxy: true,
-    debugL: true,
+    // debugL: true,
     baseURL: 'http://localhost:4000'
   },
   proxy: {
@@ -93,7 +103,7 @@ module.exports = {
         loader: 'url-loader',
         exclude: /(assets\/icons)/,
         query: {
-          limit: 1000, // 1KO
+          limit: 10000, // 1KO
           name: 'img/[name].[hash:7].[ext]'
         }
       })

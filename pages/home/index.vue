@@ -17,20 +17,24 @@
       </ul>
     </nav>
     <div class="post-entry-list">
-      <ul class="list-ul">
+      <transition-group
+        tag="ul"
+        name="slide-down"
+        class="list-ul"
+      >
         <li
           v-for="item in asyncData"
           :key="item.create_at"
           class="list-item">
           <!-- <nuxt-link to="/post"></nuxt-link> -->
           <div class="content-box">
-            <div class="info-row meta-row">
+            <!-- <div class="info-row meta-row">
               <ul class="meta-list">
                 <li class="item hot">
                   热
                 </li>
                 <li class="item grey">
-                  专栏
+                  {{ item.keyword }}
                 </li>
                 <li class="item grey">
                   小鱼儿
@@ -39,19 +43,27 @@
                   {{ item.create_at.substr(0, 10) }}
                 </li>
               </ul>
-            </div>
+            </div> -->
+
             <div class="info-row title-row">
-              <span class="title">{{ item.title }}</span>
+              <span class="title"><nuxt-link :to="`/post/${item._id}`">{{ item.title }}</nuxt-link></span>
+            </div>
+            <div class="info-row content-row">
+              <span class="title">{{ item.descript }}</span>
             </div>
             <div class="info-row action-row">
               <ul class="action-list">
-                <li>zan</li>
-                <li>pinglun</li>
+                <li class="item grey">
+                  {{ item.create_at.substr(0, 10) }}
+                </li>
+                <li class="item">{{ item.meta.views }} 次阅读</li>
+                <li class="item">{{ item.meta.likes }} 人喜欢</li>
+                <li class="item">{{ item.meta.comments }} 人评论</li>
               </ul>
             </div>
           </div>
         </li>
-      </ul>
+      </transition-group>
     </div>
   </section>
 </template>
@@ -63,8 +75,10 @@ export default {
   async asyncData({ params, app, store }) {
     // console.log(store)
     // let res = await store.dispatch('post/getPostList')
-    let res = await app.$axios.get('/admin/index')
-    return { asyncData: res.data.data }
+    let { data } = await app.$axios.get('/admin/index')
+    return {
+      asyncData: data.data
+    }
   },
 
   components: {
@@ -101,20 +115,25 @@ export default {
     margin-top: 15px;
     background: #fff;
     .list-item {
-      padding: 15px;
+      padding: 10px 15px 0;
     }
     .content-box {
+      border-bottom: 1px solid #f1f1f1;
+      padding-bottom: 10px;
       .title-row {
-        margin: 6px 0 12px;
+        margin: 0 0 6px;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
         .title {
-          font-size: 16px;
+          font-size: 20px;
           font-weight: 600;
           line-height: 1.2;
           color: #2e3135;
         }
+      }
+      .content-row {
+        margin: 30px 0;
       }
       .info-row {
         .meta-list {
@@ -129,15 +148,34 @@ export default {
             font-size: 12px;
           }
           .item {
-            &:after {
-              content: '\B7';
-              margin: 0 3px;
-              color: #b2bac2;
+            display: flex;
+            align-items: center;
+            &:not(:last-child):after {
+              content: ' ';
+              background: #b2bac2;
+              width: 2px;
+              height: 2px;
+              display: inline-block;
+              margin: 0 5px;
             }
           }
         }
         .action-list {
           display: flex;
+          .item {
+            display: flex;
+            align-items: center;
+            color: #b2bac2;
+            font-size: 12px;
+            &:not(:last-child):after {
+              content: ' ';
+              background: #b2bac2;
+              width: 2px;
+              height: 2px;
+              display: inline-block;
+              margin: 0 5px;
+            }
+          }
         }
       }
     }

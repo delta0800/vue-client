@@ -3,7 +3,9 @@
     <v-header/>
     <section class="main-container">
       <div class="main">
+        <!-- <transition name="slide-up"> -->
         <nuxt/>
+        <!-- </transition> -->
         <aside-bar/>
       </div>
     </section>
