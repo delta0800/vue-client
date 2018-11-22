@@ -38,7 +38,8 @@ module.exports = {
   css: [
     'element-ui/lib/theme-chalk/index.css',
     '~assets/css/reset.css',
-    '~assets/css/main.css'
+    '~assets/css/main.css',
+    '~assets/markdown/markdown.css'
   ],
   // 使用transition需要创建样式css文件
 

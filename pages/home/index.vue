@@ -17,9 +17,7 @@
       </ul>
     </nav>
     <div class="post-entry-list">
-      <transition-group
-        tag="ul"
-        name="slide-down"
+      <ul
         class="list-ul"
       >
         <li
@@ -63,7 +61,7 @@
             </div>
           </div>
         </li>
-      </transition-group>
+      </ul>
     </div>
   </section>
 </template>
@@ -80,7 +78,7 @@ export default {
       asyncData: data.data
     }
   },
-
+  transition: 'fade',
   components: {
     Logo
   }
@@ -89,7 +87,8 @@ export default {
 
 <style lang="less">
 .home {
-  margin-right: 15rem;
+  margin-right: 240px;
+  width: 45rem;
   .home-nav {
     display: flex;
     justify-content: space-between;

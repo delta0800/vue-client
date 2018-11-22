@@ -3,9 +3,7 @@
     <v-header/>
     <section class="main-container">
       <div class="main">
-        <!-- <transition name="slide-up"> -->
         <nuxt/>
-        <!-- </transition> -->
         <aside-bar/>
       </div>
     </section>
@@ -36,7 +34,7 @@ export default {
     width: 100%;
     max-width: 960px;
     margin: 15px auto 0;
-    height: 1000px;
+    height: 2000px;
     // border: 1px solid red;
   }
 }
