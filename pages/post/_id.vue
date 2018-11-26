@@ -19,16 +19,10 @@
 
 <script>
 export default {
-  async asyncData({ app, params }) {
-    let { data } = await app.$axios
-      .get('/admin/post', {
-        params: {
-          postId: params.id
-        }
-      })
-      .catch(err => {
-        console.error(err)
-      })
+  async asyncData({ store, params }) {
+    let { data } = await store.dispatch('post/getPostById', {
+      postId: params.id
+    })
     if (data.code === 0) {
       return {
         postData: data.data[0]

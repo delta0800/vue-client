@@ -70,10 +70,8 @@
 import Logo from '~/components/Logo.vue'
 
 export default {
-  async asyncData({ params, app, store }) {
-    // console.log(store)
-    // let res = await store.dispatch('post/getPostList')
-    let { data } = await app.$axios.get('/admin/index')
+  async asyncData({ store }) {
+    let { data } = await store.dispatch('post/getPostList')
     return {
       asyncData: data.data
     }

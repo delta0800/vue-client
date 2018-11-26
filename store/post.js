@@ -1,4 +1,4 @@
-import axios from 'axios'
+import { getPost, getPostById } from '~/api'
 
 export const state = () => ({
   postList: []
@@ -11,10 +11,10 @@ export const mutations = {
 }
 export const actions = {
   async getPostList({ commit, rootGetters }) {
-    console.log(axios)
-    let { data } = await axios
-      .get('/admin/index')
-      .catch(err => console.error(err))
-    return data
+    return await getPost()
+  },
+
+  async getPostById({ commit, rootGetters }, params) {
+    return await getPostById(params)
   }
 }

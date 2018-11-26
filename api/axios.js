@@ -1,10 +1,13 @@
 import axios from 'axios'
 import querystring from 'querystring'
 
-const ax = axios.create({
-  baseURL: ''
-})
+const defaultOptions = {}
 
+if (process.server) {
+  defaultOptions.baseURL = `http://${process.env.HOST || 'localhost'}:${process
+    .env.PORT || 4000}`
+}
+const ax = axios.create(defaultOptions)
 // 拦截器
 ax.interceptors.request.use(
   config => {
@@ -33,9 +36,9 @@ ax.interceptors.response.use(
 )
 
 export default {
-  get(url, params, config = defaultOption) {
+  get(url, params, config) {
     return new Promise((resolve, reject) => {
-      axios.get(url, { params, ...config }).then(
+      ax.get(url, { params, ...config }).then(
         res => {
           resolve(res)
         },
@@ -45,9 +48,9 @@ export default {
       )
     })
   },
-  post(url, params, config = defaultOption) {
+  post(url, params, config) {
     return new Promise((resolve, reject) => {
-      axios.post(url, params, config).then(
+      ax.post(url, params, config).then(
         res => {
           resolve(res)
         },
