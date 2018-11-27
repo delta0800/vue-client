@@ -10,6 +10,11 @@
           <li class="item">{{ postData.meta.comments }} 人评论</li>
         </ul>
       </div>
+      <div class="banner">
+        <img
+          :src="postData.images"
+          alt="banner">
+      </div>
       <div
         class="post-content fmt"
         v-html="postData.content"/>
