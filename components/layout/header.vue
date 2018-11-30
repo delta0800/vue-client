@@ -70,8 +70,7 @@ export default {
     .container {
       display: flex;
       align-items: center;
-      max-width: 960px;
-      width: 100%;
+      width: 1200px;
       height: 100%;
       margin: 0 auto;
       .logo {

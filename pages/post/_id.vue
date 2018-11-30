@@ -17,7 +17,7 @@
       </div>
       <div
         class="post-content fmt"
-        v-html="postData.content"/>
+        v-html="postData.markdown"/>
     </div>
   </div>
 </template>
@@ -47,7 +47,7 @@ export default {
 .post {
   background: #fff;
   padding: 15px;
-  width: 45rem;
+  width: 55rem;
   margin-right: 240px;
   .post-title {
     font-size: 18px;

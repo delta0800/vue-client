@@ -1,7 +1,7 @@
 <template>
   <section class="home">
     <nav class="home-nav-f"/>
-    <nav class="home-nav">
+    <!-- <nav class="home-nav">
       <ul class="home-nav-ul">
         <div class="avatar"/>
         <li class="nav-item">发沸点</li>
@@ -15,7 +15,7 @@
             href="##">草稿</a>
         </li>
       </ul>
-    </nav>
+    </nav> -->
     <div class="post-entry-list">
       <ul
         class="list-ul"
@@ -25,6 +25,11 @@
           :key="item.create_at"
           class="list-item">
           <!-- <nuxt-link to="/post"></nuxt-link> -->
+          <div class="banner-box">
+            <img
+              :src="item.images"
+              alt="">
+          </div>
           <div class="content-box">
             <!-- <div class="info-row meta-row">
               <ul class="meta-list">
@@ -86,7 +91,7 @@ export default {
 <style lang="less">
 .home {
   margin-right: 240px;
-  width: 45rem;
+  width: 55rem;
   .home-nav {
     display: flex;
     justify-content: space-between;
@@ -112,25 +117,43 @@ export default {
     margin-top: 15px;
     background: #fff;
     .list-item {
-      padding: 10px 15px 0;
+      position: relative;
+      padding-right: 150px;
+      border-bottom: 1px solid #f1f1f1;
+    }
+    .banner-box {
+      position: absolute;
+      width: 125px;
+      height: 100px;
+      right: 0;
+      top: 50%;
+      margin-top: -50px;
+      img {
+        height: 100%;
+        border-radius: 5px;
+      }
     }
     .content-box {
-      border-bottom: 1px solid #f1f1f1;
-      padding-bottom: 10px;
+      padding: 10px;
       .title-row {
         margin: 0 0 6px;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
         .title {
-          font-size: 20px;
-          font-weight: 600;
-          line-height: 1.2;
-          color: #2e3135;
+          color: #333;
+          display: inherit;
+          font-size: 18px;
+          font-weight: 700;
+          line-height: 1.5;
         }
       }
       .content-row {
-        margin: 30px 0;
+        margin: 0 0 10px 0;
+        min-height: 50px;
+        font-size: 13px;
+        line-height: 24px;
+        color: #666;
       }
       .info-row {
         .meta-list {

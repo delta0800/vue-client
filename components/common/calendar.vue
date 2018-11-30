@@ -159,7 +159,7 @@ export default {
         text-align: center;
         &.arrow {
           width: 2em;
-          background-color: #dedede;
+          // background-color: #dedede;
           transition: all 1s;
           cursor: pointer;
           &:hover {

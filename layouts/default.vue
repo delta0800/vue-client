@@ -27,12 +27,10 @@ export default {
   width: 100%;
 }
 .main-container {
-  background: #f4f5f5;
   overflow: hidden;
   .main {
     position: relative;
-    width: 100%;
-    max-width: 960px;
+    width: 1200px;
     margin: 15px auto 0;
     height: 2000px;
     // border: 1px solid red;
