@@ -31,14 +31,6 @@
                   size="small"
                   type="text">登录后台</el-button>
               </li>
-              <li class="nav-main">
-                <div class="avatar">
-                  <img
-                    src="/img/avatar.jpeg"
-                    alt="">
-                </div>
-                <svg-icon icon-class="people"/>
-              </li>
             </ul>
           </div>
         </div>

@@ -46,7 +46,6 @@ export default {
 <style lang="less">
 .post {
   background: #fff;
-  padding: 15px;
   width: 55rem;
   margin-right: 240px;
   .post-title {

@@ -31,25 +31,15 @@
               alt="">
           </div>
           <div class="content-box">
-            <!-- <div class="info-row meta-row">
-              <ul class="meta-list">
-                <li class="item hot">
-                  热
-                </li>
-                <li class="item grey">
-                  {{ item.keyword }}
-                </li>
-                <li class="item grey">
-                  小鱼儿
-                </li>
-                <li class="item grey">
-                  {{ item.create_at.substr(0, 10) }}
-                </li>
-              </ul>
-            </div> -->
-
             <div class="info-row title-row">
               <span class="title"><nuxt-link :to="`/post/${item._id}`">{{ item.title }}</nuxt-link></span>
+            </div>
+            <div class="info-row tag-row">
+              <el-tag
+                v-for="tag in item.tag"
+                :key="tag"
+                size="mini"
+                type="info">{{ tag }}</el-tag>
             </div>
             <div class="info-row content-row">
               <span class="title">{{ item.descript }}</span>
@@ -114,7 +104,6 @@ export default {
     }
   }
   .post-entry-list {
-    margin-top: 15px;
     background: #fff;
     .list-item {
       position: relative;
@@ -146,6 +135,18 @@ export default {
           font-size: 18px;
           font-weight: 700;
           line-height: 1.5;
+          transition: all 1s linear;
+          a:hover {
+            color: #1890ff !important;
+          }
+        }
+      }
+      .tag-row {
+        margin: 10px 0;
+        .el-tag {
+          &:not(:first-child) {
+            margin-left: 10px;
+          }
         }
       }
       .content-row {

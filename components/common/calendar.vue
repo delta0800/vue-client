@@ -145,7 +145,7 @@ export default {
 .calendar-box {
   min-height: 17em;
   background: #fff;
-  padding: 10px;
+  padding: 15px;
   > .months {
     margin-bottom: 0.5em;
     > .month-list {
