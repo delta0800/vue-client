@@ -21,9 +21,9 @@
           v-for="tag in dynamicTags"
           :key="tag"
           :disable-transitions="false"
+          :type="switchType()"
           closable
           size="small"
-          type="info"
           @close="handleClose(tag)">
           {{ tag }}
         </el-tag>
@@ -56,12 +56,26 @@ export default {
   },
   data() {
     return {
-      dynamicTags: ['帅气的', '独一无二', '难以捉摸'],
+      dynamicTags: [
+        '帅气的',
+        'CSS3',
+        '难以捉摸',
+        'Javascript',
+        'React',
+        '独一无二',
+        'Vue',
+        'ES6'
+      ],
       inputVisible: false,
       inputValue: ''
     }
   },
+  computed: {},
   methods: {
+    switchType() {
+      const typeArr = ['success', 'warning', 'danger', 'primary']
+      return typeArr[Math.round(Math.random() * (typeArr.length - 1))]
+    },
     handleClose(tag) {
       this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1)
     },

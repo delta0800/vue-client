@@ -9,12 +9,16 @@
           <div class="header-nav">
             <ul class="ul-main">
               <li class="nav-main">
-                <ul class="nav-main-ul">
-                  <li class="nav-item"><nuxt-link to="/home">首页</nuxt-link></li>
-                  <li class="nav-item">文章</li>
-                  <li class="nav-item">心情</li>
-                  <li class="nav-item">标签</li>
-                </ul>
+                <el-menu
+                  :default-active="activeIndex"
+                  class="el-menu-demo"
+                  mode="horizontal"
+                  @select="handleSelect">
+                  <el-menu-item index="1">首页</el-menu-item>
+                  <el-menu-item index="2">归档</el-menu-item>
+                  <el-menu-item index="3">分类</el-menu-item>
+                  <el-menu-item index="4">关于</el-menu-item>
+                </el-menu>
               </li>
               <li class="nav-main search">
                 <form
@@ -40,14 +44,18 @@
 </template>
 
 <script>
-import dome from '~/static/icons/people.svg'
 export default {
   data() {
     return {
       form: {
         searchValue: ''
       },
-      demo: dome
+      activeIndex: '1'
+    }
+  },
+  methods: {
+    handleSelect() {
+      console.log(12111)
     }
   }
 }

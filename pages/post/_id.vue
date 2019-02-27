@@ -12,6 +12,7 @@
       </div>
       <div class="banner">
         <img
+          v-if="postData.images"
           :src="postData.images"
           alt="banner">
       </div>
