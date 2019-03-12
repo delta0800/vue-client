@@ -1,6 +1,5 @@
 <template>
   <section class="welcome">
-
     <section
       id="banner"
       data-video="images/banner">

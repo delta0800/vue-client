@@ -5,13 +5,18 @@ export const state = () => ({
 })
 
 export const mutations = {
-  GET_POST_LIST(state, data) {
-    state.postList = data
+  GET_POST_LIST(state, { payload }) {
+    state.postList = payload.data
   }
 }
+
 export const actions = {
-  async getPostList({ commit, rootGetters }) {
-    return await getPost()
+  async getPostList({ commit }) {
+    let { data } = await getPost()
+    commit({
+      type: 'GET_POST_LIST',
+      payload: data
+    })
   },
 
   async getPostById({ commit, rootGetters }, params) {

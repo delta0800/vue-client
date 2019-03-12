@@ -1,62 +1,52 @@
 <template>
   <section class="home">
-    <nav class="home-nav-f"/>
-    <!-- <nav class="home-nav">
-      <ul class="home-nav-ul">
-        <div class="avatar"/>
-        <li class="nav-item">发沸点</li>
-        <li class="nav-item">写文章</li>
-        <li class="nav-item">分享链接</li>
-      </ul>
-      <ul class="home-nav-ul">
-        <li>
-          <a
-            class="draft"
-            href="##">草稿</a>
-        </li>
-      </ul>
-    </nav> -->
     <div class="post-entry-list">
-      <ul
-        class="list-ul"
-      >
-        <li
+      <div class="list-ul">
+        <template
           v-for="item in asyncData"
-          :key="item.create_at"
           class="list-item">
-          <!-- <nuxt-link to="/post"></nuxt-link> -->
-          <div class="banner-box">
-            <img
-              :src="item.images"
-              alt="">
-          </div>
-          <div class="content-box">
-            <div class="info-row title-row">
-              <span class="title"><nuxt-link :to="`/post/${item._id}`">{{ item.title }}</nuxt-link></span>
+
+          <el-card
+            :key="item.create_at"
+            style="margin-bottom: 15px;"
+            class="list-card">
+            <!-- <div class="banner-box">
+              <img
+                :src="item.images"
+                alt="">
+            </div> -->
+            <div
+              :key="item.create_at"
+              :style="{backgroundImage:'url(' + item.images + ')'}"
+              class="attach"/>
+            <div class="content-box">
+              <div class="info-row title-row">
+                <span class="title"><nuxt-link :to="`/post/${item._id}`">{{ item.title }}</nuxt-link></span>
+              </div>
+              <div class="info-row tag-row">
+                <el-tag
+                  v-for="tag in item.tag"
+                  :key="tag"
+                  size="mini"
+                  type="info">{{ tag }}</el-tag>
+              </div>
+              <div class="info-row content-row">
+                <span class="title">{{ item.descript }}</span>
+              </div>
+              <div class="info-row action-row">
+                <ul class="action-list">
+                  <li class="item grey">
+                    {{ item.create_at.substr(0, 10) }}
+                  </li>
+                  <li class="item">{{ item.meta.views }} 次阅读</li>
+                  <li class="item">{{ item.meta.likes }} 人喜欢</li>
+                  <li class="item">{{ item.meta.comments }} 人评论</li>
+                </ul>
+              </div>
             </div>
-            <div class="info-row tag-row">
-              <el-tag
-                v-for="tag in item.tag"
-                :key="tag"
-                size="mini"
-                type="info">{{ tag }}</el-tag>
-            </div>
-            <div class="info-row content-row">
-              <span class="title">{{ item.descript }}</span>
-            </div>
-            <div class="info-row action-row">
-              <ul class="action-list">
-                <li class="item grey">
-                  {{ item.create_at.substr(0, 10) }}
-                </li>
-                <li class="item">{{ item.meta.views }} 次阅读</li>
-                <li class="item">{{ item.meta.likes }} 人喜欢</li>
-                <li class="item">{{ item.meta.comments }} 人评论</li>
-              </ul>
-            </div>
-          </div>
-        </li>
-      </ul>
+          </el-card>
+        </template>
+      </div>
     </div>
   </section>
 </template>
@@ -66,9 +56,10 @@ import Logo from '~/components/Logo.vue'
 
 export default {
   async asyncData({ store }) {
-    let { data } = await store.dispatch('post/getPostList')
+    !store.state.post.postList.length &&
+      (await store.dispatch('post/getPostList'))
     return {
-      asyncData: data.data
+      asyncData: store.state.post.postList
     }
   },
   transition: 'fade',
@@ -80,8 +71,6 @@ export default {
 
 <style lang="less">
 .home {
-  margin-right: 240px;
-  width: 55rem;
   .home-nav {
     display: flex;
     justify-content: space-between;
@@ -104,23 +93,23 @@ export default {
     }
   }
   .post-entry-list {
-    background: #fff;
-    .list-item {
-      position: relative;
-      padding-right: 150px;
-      border-bottom: 1px solid #f1f1f1;
+    padding: 0 300px 40px 40px;
+    .list-card {
+      transition: all 0.3s linear;
     }
-    .banner-box {
-      position: absolute;
-      width: 125px;
-      height: 100px;
-      right: 0;
-      top: 50%;
-      margin-top: -50px;
-      img {
-        height: 100%;
-        border-radius: 5px;
-      }
+    .list-card:hover {
+      cursor: pointer;
+      background: #effbff;
+      box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.1);
+      -webkit-transform: translate3d(0, -5px 0);
+      transform: translate3d(0, -5px 0);
+    }
+    .attach {
+      width: 100%;
+      height: 300px;
+      background-attachment: fixed;
+      background-size: cover;
+      background-position: center center;
     }
     .content-box {
       padding: 10px;

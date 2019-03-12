@@ -9,10 +9,19 @@
       <p class="username">Infun</p>
       <p class="sign">No pain, No gain</p>
       <p class="detail">一个会打篮球的前端er</p>
-    </div>
-    <div class="social">
-      <p class="description"><svg-icon icon-class="address"/> 北京 丰台</p>
-      <p class="description"><svg-icon icon-class="mail"/> 973394690@qq.com</p>
+      <ul class="link-list">
+        <li>
+          <a
+            href="https://github.com/infun-soso"
+            target="_blank">
+            <svg-icon icon-class="github"/>
+            <span style="color: blue;text-decoration: underline;">github</span>
+          </a>
+        </li>
+        <li>
+          <svg-icon icon-class="address"/> 北京 丰台
+        </li>
+      </ul>
     </div>
     <div class="my-tags">
       <p class="tags-title">个人标签</p>
@@ -101,11 +110,19 @@ export default {
 
 <style lang="less">
 .aside {
-  width: 18rem;
-  position: absolute;
-  top: 0;
-  right: 0;
+  padding: 0 15px;
   z-index: 1;
+  border-right: 1px solid #ebedf0;
+  height: calc(100vh - 80px);
+  text-align: center;
+  color: rgba(0, 0, 0, 0.65);
+  overflow-y: auto;
+  .link-list {
+    display: flex;
+    justify-content: space-around;
+    width: 160px;
+    margin: 0 auto;
+  }
   .el-tag {
     margin-right: 8px;
     margin-bottom: 8px;
@@ -133,10 +150,10 @@ export default {
     padding-bottom: 20px;
     .avatar {
       margin: 0 auto 15px;
-      width: 100px;
-      height: 100px;
+      width: 132px;
+      height: 132px;
       img {
-        border-radius: 50px;
+        border-radius: 50%;
       }
     }
     .username {

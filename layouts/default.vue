@@ -1,13 +1,30 @@
 <template>
   <div id="infun">
-    <v-header/>
-    <section class="main-container">
-      <div class="main">
-        <nuxt/>
-        <aside-bar/>
-      </div>
-    </section>
-    <v-footer/>
+    <el-container>
+      <el-header>
+        <v-header/>
+      </el-header>
+      <el-main>
+        <el-col
+          :xs="0"
+          :sm="4"
+          :md="5"
+          :lg="5"
+          :xl="4">
+          <aside-bar/>
+        </el-col>
+        <el-col
+          :xs="20"
+          :sm="20"
+          :md="19"
+          :lg="19"
+          :xl="20">
+          <div class="content-wrapper">
+            <nuxt/>
+          </div>
+        </el-col>
+      </el-main>
+    </el-container>
   </div>
 </template>
 <script>
@@ -25,16 +42,14 @@ export default {
 
 
 <style lang="less">
-#infun {
-  height: 100%;
-  width: 100%;
+main {
+  padding: 20px 0 0 0 !important;
 }
-.main-container {
-  .main {
-    position: relative;
-    width: 1200px;
-    margin: 15px auto 0;
-    // border: 1px solid red;
-  }
+header {
+  padding: 0 !important;
+}
+.content-wrapper {
+  height: calc(100vh - 80px);
+  overflow: auto;
 }
 </style>

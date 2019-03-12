@@ -1,0 +1,37 @@
+<template>
+  <div
+    class="archive">
+    <el-timeline>
+      <el-timeline-item
+        v-for="(item, index) in asyncData"
+        :key="index"
+        :timestamp="item.create_at"
+        color="#52c41a"
+        placement="top">
+        <el-card>
+          <h4 style="font-weight: 500; font-size: 16px;margin-bottom: 5px;">{{ item.title }}</h4>
+          <p>{{ item.descript }}</p>
+        </el-card>
+      </el-timeline-item>
+    </el-timeline>
+  </div>
+</template>
+
+<script>
+export default {
+  async asyncData({ store }) {
+    await store.dispatch('post/getPostList')
+    return {
+      asyncData: store.state.post.postList
+    }
+  },
+  transition: 'fade'
+}
+</script>
+
+<style>
+.archive {
+  width: 70%;
+  margin: 0 auto;
+}
+</style>
