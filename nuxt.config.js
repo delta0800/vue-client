@@ -34,14 +34,15 @@ module.exports = {
     'element-ui/lib/theme-chalk/index.css',
     '~assets/css/reset.css',
     '~assets/css/main.css',
-    '~assets/markdown/markdown.css'
+    '~assets/markdown/markdown.css',
+    '~assets/styles/fonts/style.css'
   ],
   // 使用transition需要创建样式css文件
 
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: ['@/plugins/element-ui', '@/plugins/icon'],
+  plugins: ['@/plugins/element-ui', '@/plugins/icon', '@/plugins/anchor'],
 
   /*
   ** Nuxt.js modules

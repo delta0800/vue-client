@@ -48,6 +48,9 @@ main {
 header {
   padding: 0 !important;
 }
+// #infun {
+//   background: url('../static/img/bg2.jpg');
+// }
 .content-wrapper {
   height: calc(100vh - 80px);
   overflow: auto;

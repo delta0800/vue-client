@@ -5,47 +5,52 @@
         <template
           v-for="item in asyncData"
           class="list-item">
-
           <el-card
             :key="item.create_at"
             style="margin-bottom: 15px;"
             class="list-card">
-            <!-- <div class="banner-box">
-              <img
-                :src="item.images"
-                alt="">
-            </div> -->
-            <div
-              :key="item.create_at"
-              :style="{backgroundImage:'url(' + item.images + ')'}"
-              class="attach"/>
-            <div class="content-box">
-              <div class="info-row title-row">
-                <span class="title"><nuxt-link :to="`/post/${item._id}`">{{ item.title }}</nuxt-link></span>
+            <nuxt-link :to="`/post/${item._id}`">
+              <div
+                :key="item.create_at"
+                :style="{backgroundImage:'url(' + item.images + ')'}"
+                class="attach"/>
+              <div class="content-box">
+                <div class="info-row title-row">
+                  <span class="title">{{ item.title }}</span>
+                </div>
+                <div class="info-row tag-row">
+                  <svg-icon icon-class="tag" />
+                  <el-tag
+                    v-for="tag in item.tag"
+                    :key="tag"
+                    size="mini"
+                    type="primary">{{ tag }}</el-tag>
+                </div>
+                <div class="info-row content-row">
+                  <span class="title">{{ item.descript }}</span>
+                </div>
+                <div class="info-row action-row">
+                  <ul class="action-list">
+                    <li class="item grey">
+                      {{ item.create_at.substr(0, 10) }}
+                    </li>
+                    <li class="item">{{ item.meta.views }} 次阅读</li>
+                    <li class="item">{{ item.meta.likes }} 人喜欢</li>
+                    <li class="item">{{ item.meta.comments }} 人评论</li>
+                  </ul>
+                </div>
               </div>
-              <div class="info-row tag-row">
-                <el-tag
-                  v-for="tag in item.tag"
-                  :key="tag"
-                  size="mini"
-                  type="info">{{ tag }}</el-tag>
-              </div>
-              <div class="info-row content-row">
-                <span class="title">{{ item.descript }}</span>
-              </div>
-              <div class="info-row action-row">
-                <ul class="action-list">
-                  <li class="item grey">
-                    {{ item.create_at.substr(0, 10) }}
-                  </li>
-                  <li class="item">{{ item.meta.views }} 次阅读</li>
-                  <li class="item">{{ item.meta.likes }} 人喜欢</li>
-                  <li class="item">{{ item.meta.comments }} 人评论</li>
-                </ul>
-              </div>
-            </div>
+            </nuxt-link>
           </el-card>
         </template>
+      </div>
+      <div class="preview">
+        <divider title="预览"/>
+        <li
+          v-for="item in asyncData"
+          :key="item.create_at">
+          <nuxt-link :to="`/post/${item._id}`">{{ item.title }}</nuxt-link>
+        </li>
       </div>
     </div>
   </section>
@@ -53,6 +58,7 @@
 
 <script>
 import Logo from '~/components/Logo.vue'
+import divider from '~/components/common/divider'
 
 export default {
   async asyncData({ store }) {
@@ -64,7 +70,8 @@ export default {
   },
   transition: 'fade',
   components: {
-    Logo
+    Logo,
+    divider
   }
 }
 </script>
@@ -146,29 +153,9 @@ export default {
         color: #666;
       }
       .info-row {
-        .meta-list {
-          display: flex;
-          .hot {
-            color: red;
-            font-weight: 500;
-            font-size: 12px;
-          }
-          .grey {
-            color: #b2bac2;
-            font-size: 12px;
-          }
-          .item {
-            display: flex;
-            align-items: center;
-            &:not(:last-child):after {
-              content: ' ';
-              background: #b2bac2;
-              width: 2px;
-              height: 2px;
-              display: inline-block;
-              margin: 0 5px;
-            }
-          }
+        .el-tag {
+          margin-left: 0 !important;
+          margin-right: 10px;
         }
         .action-list {
           display: flex;
@@ -187,6 +174,24 @@ export default {
             }
           }
         }
+      }
+    }
+  }
+  .preview {
+    position: fixed;
+    width: 260px;
+    top: 80px;
+    right: 20px;
+    list-style-type: none;
+    li {
+      display: block;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-left: -1px;
+      a {
+        color: #8590a6;
       }
     }
   }

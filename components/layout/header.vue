@@ -100,6 +100,9 @@ export default {
         case '2':
           this.$router.push('/archive')
           break
+        case '4':
+          this.$router.push('/about')
+          break
         default:
           break
       }
