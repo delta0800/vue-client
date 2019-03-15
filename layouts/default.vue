@@ -14,7 +14,7 @@
           <aside-bar/>
         </el-col>
         <el-col
-          :xs="20"
+          :xs="24"
           :sm="20"
           :md="19"
           :lg="19"

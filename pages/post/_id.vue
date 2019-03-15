@@ -20,14 +20,16 @@
         class="post-content fmt"
         v-html="postData.markdown"/>
     </div>
-    <div class="right-navigation">
-      <span
-        v-anchor="item.title"
-        v-for="(item, index) in anchorList"
-        :key="index">
-        {{ item.title }}
-      </span>
-    </div>
+    <el-col :xs="0">
+      <div class="right-navigation">
+        <span
+          v-anchor="item.title"
+          v-for="(item, index) in anchorList"
+          :key="index">
+          {{ item.title }}
+        </span>
+      </div>
+    </el-col>
   </div>
 </template>
 
@@ -91,6 +93,11 @@ export default {
 </script>
 
 <style lang="less">
+@media only screen and (max-width: 768px) {
+  .post {
+    padding: 0 20px !important;
+  }
+}
 .post {
   padding: 0 300px 40px 40px;
   .right-navigation {

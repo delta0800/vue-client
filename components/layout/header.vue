@@ -3,7 +3,7 @@
     <div class="main-header-box">
       <div class="container">
         <el-col
-          :xs="0"
+          :xs="24"
           :sm="4"
           :md="5"
           :lg="5"
@@ -15,8 +15,11 @@
               class="logo">Infun的博客</a>
           </div>
         </el-col>
+        <i
+          class="el-icon-more more-btn"
+          @click="showMenu"/>
         <el-col
-          :xs="24"
+          :xs="0"
           :sm="20"
           :md="19"
           :lg="19"
@@ -51,7 +54,7 @@
                   </el-menu-item>
                 </el-menu>
               </li>
-              <li class="nav-main search">
+              <!-- <li class="nav-main search">
                 <form
                   :model="form"
                   class="g-search">
@@ -60,7 +63,7 @@
                     placeholder="请输入内容"
                     prefix-icon="el-icon-search"/>
                 </form>
-              </li>
+              </li> -->
               <li class="nav-main">
                 <el-button
                   size="small"
@@ -69,6 +72,35 @@
             </ul>
           </div>
         </el-col>
+      </div>
+      <div
+        v-if="showMenuList"
+        class="mobileMenu">
+        <el-menu
+          :default-active="activeIndex"
+          class="el-menu-demo"
+          @select="handleSelect">
+          <el-menu-item index="1">
+            <svg-icon
+              icon-class="home"/>
+            首页
+          </el-menu-item>
+          <el-menu-item index="2">
+            <svg-icon
+              icon-class="archive"/>
+            归档
+          </el-menu-item>
+          <el-menu-item index="3">
+            <svg-icon
+              icon-class="comment"/>
+            留言
+          </el-menu-item>
+          <el-menu-item index="4">
+            <svg-icon
+              icon-class="about"/>
+            关于
+          </el-menu-item>
+        </el-menu>
       </div>
     </div>
   </div>
@@ -80,7 +112,8 @@ export default {
     return {
       form: {
         searchValue: ''
-      }
+      },
+      showMenuList: false
     }
   },
   computed: {
@@ -93,6 +126,7 @@ export default {
   },
   methods: {
     handleSelect(selected) {
+      this.showMenuList = false
       switch (selected) {
         case '1':
           this.$router.push('/home')
@@ -106,12 +140,37 @@ export default {
         default:
           break
       }
+    },
+    showMenu() {
+      this.showMenuList = !this.showMenuList
     }
   }
 }
 </script>
 
 <style lang="less">
+.mobileMenu {
+  z-index: 1;
+  position: absolute;
+  width: 35%;
+  right: 0;
+  li {
+    border-bottom: 1px solid #f1f1f1;
+    border-left: 1px solid #f1f1f1;
+    text-align: center;
+  }
+}
+.more-btn {
+  display: none;
+  font-size: 20px;
+}
+@media only screen and (max-width: 768px) {
+  .more-btn {
+    display: inline-block;
+    position: absolute;
+    right: 8%;
+  }
+}
 .main-header-box {
   height: 60px;
   border-bottom: 1px solid #f1f1f1;
@@ -125,6 +184,7 @@ export default {
     align-items: center;
     height: 100%;
     margin: 0 auto;
+    position: relative;
     .header-nav {
       flex: 1 0 auto;
       height: 100%;

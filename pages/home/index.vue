@@ -44,14 +44,16 @@
           </el-card>
         </template>
       </div>
-      <div class="preview">
-        <divider title="预览"/>
-        <li
-          v-for="item in asyncData"
-          :key="item.create_at">
-          <nuxt-link :to="`/post/${item._id}`">{{ item.title }}</nuxt-link>
-        </li>
-      </div>
+      <el-col :xs="0">
+        <div class="preview">
+          <divider title="预览"/>
+          <li
+            v-for="item in asyncData"
+            :key="item.create_at">
+            <nuxt-link :to="`/post/${item._id}`">{{ item.title }}</nuxt-link>
+          </li>
+        </div>
+      </el-col>
     </div>
   </section>
 </template>
@@ -97,6 +99,11 @@ export default {
       .draft {
         padding-right: 15px;
       }
+    }
+  }
+  @media only screen and (max-width: 768px) {
+    .post-entry-list {
+      padding: 0 20px !important;
     }
   }
   .post-entry-list {
