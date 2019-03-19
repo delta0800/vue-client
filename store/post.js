@@ -1,4 +1,4 @@
-import { getPost, getPostById } from '~/api'
+import { getPost, getPostById, postView } from '~/api'
 
 export const state = () => ({
   postList: []

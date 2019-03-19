@@ -64,8 +64,7 @@ import divider from '~/components/common/divider'
 
 export default {
   async asyncData({ store }) {
-    !store.state.post.postList.length &&
-      (await store.dispatch('post/getPostList'))
+    await store.dispatch('post/getPostList')
     return {
       asyncData: store.state.post.postList
     }

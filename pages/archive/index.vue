@@ -5,7 +5,7 @@
       <el-timeline-item
         v-for="(item, index) in asyncData"
         :key="index"
-        :timestamp="item.create_at"
+        :timestamp="new Date(item.create_at).toLocaleString()"
         color="#52c41a"
         placement="top">
         <el-card>

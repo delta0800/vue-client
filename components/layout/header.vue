@@ -67,7 +67,8 @@
               <li class="nav-main">
                 <el-button
                   size="small"
-                  type="text">登录后台</el-button>
+                  type="text"
+                  @click="handleLogin">登录后台</el-button>
               </li>
             </ul>
           </div>
@@ -143,6 +144,9 @@ export default {
     },
     showMenu() {
       this.showMenuList = !this.showMenuList
+    },
+    handleLogin() {
+      this.$store.commit('user/toOpenLoginModal')
     }
   }
 }

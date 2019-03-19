@@ -59,23 +59,23 @@
         <ul>
           <li>
             HTML、CSS、Javascript：能熟练开发符合 W3C 标准的页面！
-            <my-rate rate="4"/>
+            <my-rate :rate="4"/>
           </li>
           <li>
             react vue 框架：熟练掌握使用！
-            <my-rate rate="4"/>
+            <my-rate :rate="4"/>
           </li>
           <li>
             es6：日常开发必备，以及掌握基本面向对象编程实现！
-            <my-rate rate="4"/>
+            <my-rate :rate="4"/>
           </li>
           <li>
             webpack: 入门级别，可以对脚手架进行针对性的配置！
-            <my-rate rate="3"/>
+            <my-rate :rate="3"/>
           </li>
           <li>
             node mongodb：针对需求可以做到简单的数据库设计、接口的开发与设计！
-            <my-rate rate="3"/>
+            <my-rate :rate="3"/>
           </li>
         </ul>
       </li>
@@ -96,10 +96,6 @@
       </li>
     </ul>
 
-    <Comment
-      article-id="{-1}"
-      comment-list="{this.state.commentList}"
-      set-comment-list="{this.setCommentList}" />
   </div>
 </template>
 
