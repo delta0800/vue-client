@@ -63,7 +63,7 @@ import Logo from '~/components/Logo.vue'
 import divider from '~/components/common/divider'
 
 export default {
-  async asyncData({ store }) {
+  async asyncData({ store, $axios }) {
     await store.dispatch('post/getPostList')
     return {
       asyncData: store.state.post.postList

@@ -158,6 +158,18 @@ export default {
      */
     commitComment() {
       console.log(this.inputComment)
+      this.$store
+        .dispatch({
+          type: 'comment/addComment',
+          payload: {
+            user_id: '5c93752fc6116979008b3722',
+            article_id: this.$route.params.id,
+            comment_content: this.inputComment
+          }
+        })
+        .then(result => {
+          console.log(result)
+        })
     },
 
     /**

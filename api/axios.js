@@ -2,7 +2,6 @@ import axios from 'axios'
 import querystring from 'querystring'
 
 const defaultOptions = {}
-
 if (process.server) {
   defaultOptions.baseURL = `http://${process.env.HOST || 'localhost'}:${process
     .env.PORT || 4000}`
@@ -11,6 +10,9 @@ const ax = axios.create(defaultOptions)
 // 拦截器
 ax.interceptors.request.use(
   config => {
+    if (process.server) {
+      config.url = config.url.substr(4)
+    }
     if (
       config.method === 'post' ||
       config.method === 'put' ||
