@@ -31,3 +31,18 @@ export const postOtherComment = ({
     comment_id
   })
 }
+
+export const doRegister = ({ name, password, email }) => {
+  return axios.post('/api/user/register', {
+    name,
+    password,
+    email
+  })
+}
+
+export const doLogin = ({ password, email }) => {
+  return axios.post('/api/user/login', {
+    password,
+    email
+  })
+}

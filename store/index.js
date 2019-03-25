@@ -1,6 +1,6 @@
 import globalConfig from '../config'
 export const state = () => ({
-  userinfo: ''
+  userInfo: ''
 })
 
 export const getters = {
@@ -15,4 +15,17 @@ export const getters = {
   }
 }
 
-export const actions = {}
+export const mutations = {
+  user(state, data) {
+    state.userInfo = data
+  }
+}
+
+export const actions = {
+  nuxtServerInit({ commit }, r) {
+    console.log(r.cookies.get())
+    if (req.session.userInfo) {
+      commit('user', req.session.userInfo)
+    }
+  }
+}

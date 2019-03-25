@@ -44,9 +44,9 @@
       <el-form :model="form">
         <el-form-item
           label-width="80"
-          label="用户名">
+          label="邮箱">
           <el-input
-            v-model="form.username"
+            v-model="form.email"
             autocomplete="off"/>
         </el-form-item>
         <el-form-item
@@ -61,10 +61,55 @@
       <div
         slot="footer"
         class="dialog-footer">
-        <el-button @click="handleLoginModalClose">取 消</el-button>
+        <el-button
+          size="mini"
+          @click="handleLoginModalClose">取 消</el-button>
         <el-button
           type="primary"
+          size="mini"
           @click="handleLoginModalConfirm">确 定</el-button>
+      </div>
+    </el-dialog>
+    <el-dialog
+      :visible="showSignUpModal"
+      title="注册"
+      width="300px"
+      @open="handleSignUpModalOpen"
+      @close="handleSignUpModalClose">
+      <el-form :model="signForm">
+        <el-form-item
+          label-width="80"
+          label="用户名（昵称）">
+          <el-input
+            v-model="signForm.name"
+            autocomplete="off"/>
+        </el-form-item>
+        <el-form-item
+          label-width="80"
+          label="密码">
+          <el-input
+            v-model="signForm.password"
+            type="password"
+            autocomplete="off"/>
+        </el-form-item>
+        <el-form-item
+          label-width="80"
+          label="邮箱">
+          <el-input
+            v-model="signForm.email"
+            autocomplete="off"/>
+        </el-form-item>
+      </el-form>
+      <div
+        slot="footer"
+        class="dialog-footer">
+        <el-button
+          size="mini"
+          @click="handleSignUpModalClose">取 消</el-button>
+        <el-button
+          type="primary"
+          size="mini"
+          @click="handleSignUpModalConfirm">确 定</el-button>
       </div>
     </el-dialog>
   </div>
@@ -83,12 +128,16 @@ export default {
   data() {
     return {
       isBackTop: false,
-      form: {}
+      form: {},
+      signForm: {}
     }
   },
   computed: {
     showLoginModal() {
       return this.$store.state.user.showLoginModal
+    },
+    showSignUpModal() {
+      return this.$store.state.user.showSignUpModal
     }
   },
   mounted() {
@@ -101,7 +150,9 @@ export default {
   methods: {
     ...mapMutations({
       toCloseLoginModal: 'user/toCloseLoginModal',
-      toOpenLoginModal: 'user/toOpenLoginModal'
+      toOpenLoginModal: 'user/toOpenLoginModal',
+      toOpenSignUpModal: 'user/toOpenSignUpModal',
+      toCloseSignUpModal: 'user/toCloseSignUpModal'
     }),
     handleLoginModalClose() {
       this.toCloseLoginModal()
@@ -109,7 +160,42 @@ export default {
     handleLoginModalOpen() {
       this.toOpenLoginModal()
     },
-    handleLoginModalConfirm() {},
+    handleSignUpModalClose() {
+      this.toCloseSignUpModal()
+    },
+    handleSignUpModalOpen() {
+      this.toOpenSignUpModal()
+    },
+    handleLoginModalConfirm() {
+      this.$store
+        .dispatch({
+          type: 'user/login',
+          payload: this.form
+        })
+        .then(result => {
+          if (result.data.code === 0) {
+            this.$message.success('登录成功')
+            this.handleLoginModalClose()
+          } else {
+            this.$message.error(result.data.msg)
+          }
+        })
+    },
+    handleSignUpModalConfirm() {
+      this.$store
+        .dispatch({
+          type: 'user/register',
+          payload: this.signForm
+        })
+        .then(result => {
+          if (result.data.code === 0) {
+            this.$message.success('注册成功')
+            this.handleSignUpModalClose()
+          } else {
+            this.$message.error(result.data.msg)
+          }
+        })
+    },
     backToTop() {
       let distance = document.getElementsByClassName('content-wrapper')[0]
         .scrollTop

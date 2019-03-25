@@ -67,8 +67,12 @@
               <li class="nav-main">
                 <el-button
                   size="small"
-                  type="text"
-                  @click="handleLogin">登录后台</el-button>
+                  type="primary"
+                  @click="handleLogin">登录</el-button>
+                <el-button
+                  size="small"
+                  type="default"
+                  @click="handleSignUp">注册</el-button>
               </li>
             </ul>
           </div>
@@ -142,6 +146,9 @@ export default {
           break
       }
     },
+    handleSignUp() {
+      this.$store.commit('user/toOpenSignUpModal')
+    },
     showMenu() {
       this.showMenuList = !this.showMenuList
     },
@@ -197,6 +204,7 @@ export default {
   .ul-main {
     display: flex;
     height: 100%;
+    justify-content: space-between;
     .search {
       flex: 1 1 auto;
       justify-content: flex-end;
@@ -205,6 +213,9 @@ export default {
       display: flex;
       align-items: center;
       padding: 0 10px;
+      &:nth-child(2) {
+        margin-right: 60px;
+      }
       .nav-main-ul {
         display: flex;
         height: 100%;

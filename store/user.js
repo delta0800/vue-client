@@ -1,5 +1,9 @@
+import { doRegister, doLogin } from '~/api'
+
 export const state = () => ({
-  showLoginModal: false
+  showLoginModal: false,
+  showSignUpModal: false
+  // userInfo: JSON.parse(localStorage.getItem('userInfo'))
 })
 
 export const mutations = {
@@ -8,7 +12,26 @@ export const mutations = {
   },
   toOpenLoginModal(state) {
     state.showLoginModal = true
+  },
+  toOpenSignUpModal(state) {
+    state.showSignUpModal = true
+  },
+  toCloseSignUpModal(state) {
+    state.showSignUpModal = false
+  },
+  saveUserInfo(state, data) {
+    // state.userInfo = data
+    localStorage.setItem('userInfo', JSON.stringify(data))
   }
 }
 
-export const actions = {}
+export const actions = {
+  async register({ commit }, { payload }) {
+    return await doRegister(payload)
+  },
+  async login({ commit }, { payload }) {
+    const userInfo = await doLogin(payload)
+    commit('saveUserInfo', userInfo.data.data)
+    return userInfo
+  }
+}

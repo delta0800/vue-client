@@ -127,7 +127,9 @@ export default {
     }
   },
   computed: {},
-  created() {},
+  created() {
+    console.log(this.$store.state)
+  },
   methods: {
     /**
      * 点赞
@@ -170,7 +172,7 @@ export default {
                 name: item.user.name,
                 avatar: item.user.avatar
               }),
-              user_id: this.userInfo.user_id
+              user_id: this.$store.state.user.userInfo.user_id
             }
           })
           .then(result => {
@@ -193,7 +195,7 @@ export default {
           .dispatch({
             type: 'comment/addComment',
             payload: {
-              user_id: this.userInfo.user_id,
+              user_id: this.$store.state.user.userInfo.user_id,
               article_id: this.$route.params.id,
               comment_content: this.inputComment
             }
