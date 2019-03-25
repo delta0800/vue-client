@@ -8,17 +8,16 @@
         :rows="3"
         class="gray-bg-input"
         type="textarea"
-        autofocus
         placeholder="写下你的评论"/>
-      <div class="btn-control">
-        <span
+      <div class="btn-control out-btn-control">
+        <!-- <span
           class="cancel"
-          @click="cancel">取消</span>
+          @click="cancel">取消</span> -->
         <el-button
           class="btn"
           type="success"
           round
-          @click="commitComment">确定</el-button>
+          @click="commitComment()">确定</el-button>
       </div>
     </div>
     <div
@@ -27,13 +26,13 @@
       class="comment">
       <div class="info">
         <img
-          :src="item.fromAvatar"
+          src="/img/avatar.jpeg"
           class="avatar"
           width="36"
           height="36">
         <div class="right">
-          <div class="name">{{ item.fromName }}</div>
-          <div class="date">{{ item.date }}</div>
+          <div class="name">{{ item.user.name }}</div>
+          <div class="date">{{ item.create_time }}</div>
         </div>
       </div>
       <div class="content">{{ item.content }}</div>
@@ -43,7 +42,7 @@
           class="like"
           @click="likeClick(item)">
           <i class="iconfont icon-like"/>
-          <span class="like-num">{{ item.likeNum > 0 ? item.likeNum + '人赞' : '赞' }}</span>
+          <span class="like-num">{{ item.likes > 0 ? item.likes + '人赞' : '赞' }}</span>
         </span>
         <span
           class="comment-reply"
@@ -54,26 +53,26 @@
       </div>
       <div class="reply">
         <div
-          v-for="(reply, index) in item.reply"
+          v-for="(reply, index) in item.other_comments"
           :key="index"
           class="item">
           <div class="reply-content">
-            <span class="from-name">{{ reply.fromName }}</span><span>: </span>
-            <span class="to-name">@{{ reply.toName }}</span>
+            <span class="from-name">{{ reply.user.name }}</span><span>: </span>
+            <span class="to-name">@{{ reply.to_user.name }}</span>
             <span>{{ reply.content }}</span>
           </div>
           <div class="reply-bottom">
-            <span>{{ reply.date }}</span>
+            <span>{{ reply.create_time }}</span>
             <span
               class="reply-text"
               @click="showCommentInput(item, reply)">
               <i class="iconfont icon-comment"/>
-              <span>回复</span>
+              <span>回复1</span>
             </span>
           </div>
         </div>
         <div
-          v-if="item.reply.length > 0"
+          v-if="item.other_comments.length > 0"
           class="write-reply"
           @click="showCommentInput(item)">
           <i class="el-icon-edit"/>
@@ -81,7 +80,7 @@
         </div>
         <transition name="fade">
           <div
-            v-if="showItemId === item.id"
+            v-if="showItemId === item._id"
             class="input-wrapper">
             <el-input
               v-model="inputComment"
@@ -98,7 +97,7 @@
                 class="btn"
                 type="success"
                 round
-                @click="commitComment">确定</el-button>
+                @click="commitComment(item, true)">确定</el-button>
             </div>
           </div>
         </transition>
@@ -121,13 +120,14 @@ export default {
   data() {
     return {
       inputComment: '',
-      showItemId: ''
+      showItemId: '',
+      userInfo: {
+        user_id: '5c93752fc6116979008b3722'
+      }
     }
   },
   computed: {},
-  created() {
-    console.log(this.comments)
-  },
+  created() {},
   methods: {
     /**
      * 点赞
@@ -156,20 +156,65 @@ export default {
     /**
      * 提交评论
      */
-    commitComment() {
-      console.log(this.inputComment)
-      this.$store
-        .dispatch({
-          type: 'comment/addComment',
-          payload: {
-            user_id: '5c93752fc6116979008b3722',
-            article_id: this.$route.params.id,
-            comment_content: this.inputComment
-          }
-        })
-        .then(result => {
-          console.log(result)
-        })
+    commitComment(item, reply) {
+      if (reply) {
+        this.$store
+          .dispatch({
+            type: 'comment/addOtherComment',
+            payload: {
+              comment_id: item._id,
+              article_id: this.$route.params.id,
+              comment_content: this.inputComment,
+              to_user: JSON.stringify({
+                user_id: item.user_id,
+                name: item.user.name,
+                avatar: item.user.avatar
+              }),
+              user_id: this.userInfo.user_id
+            }
+          })
+          .then(result => {
+            const { data } = result
+            if (data.code === 0) {
+              this.$message({
+                message: '评论成功',
+                type: 'success'
+              })
+              this.$emit('submitComment')
+            } else {
+              this.$message({
+                message: data.msg,
+                type: 'error'
+              })
+            }
+          })
+      } else {
+        this.$store
+          .dispatch({
+            type: 'comment/addComment',
+            payload: {
+              user_id: this.userInfo.user_id,
+              article_id: this.$route.params.id,
+              comment_content: this.inputComment
+            }
+          })
+          .then(result => {
+            const { data } = result
+            if (data.code === 0) {
+              this.$message({
+                message: '评论成功',
+                type: 'success'
+              })
+              this.$emit('submitComment')
+              this.inputComment = ''
+            } else {
+              this.$message({
+                message: data.msg,
+                type: 'error'
+              })
+            }
+          })
+      }
     },
 
     /**
@@ -179,11 +224,11 @@ export default {
      */
     showCommentInput(item, reply) {
       if (reply) {
-        this.inputComment = '@' + reply.fromName + ' '
+        this.inputComment = '@' + reply.user.name + ' '
       } else {
         this.inputComment = ''
       }
-      this.showItemId = item.id
+      this.showItemId = item._id
     }
   }
 }
@@ -211,8 +256,27 @@ export default {
 @content-bg-color: #fff;
 
 .comment-container {
-  padding: 0 10px;
+  margin-top: 30px;
   box-sizing: border-box;
+  .out-btn-control {
+    margin-top: 15px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-top: 10px;
+    .cancel {
+      font-size: 16px;
+      color: @text-normal;
+      margin-right: 20px;
+      cursor: pointer;
+      &:hover {
+        color: @text-333;
+      }
+    }
+    .confirm {
+      font-size: 16px;
+    }
+  }
   .comment {
     display: flex;
     flex-direction: column;

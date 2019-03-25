@@ -15,3 +15,19 @@ export const postComment = ({ user_id, article_id, comment_content }) => {
     comment_content
   })
 }
+
+export const postOtherComment = ({
+  user_id,
+  article_id,
+  comment_content,
+  to_user,
+  comment_id
+}) => {
+  return axios.post('/api/comment/add_other', {
+    user_id,
+    article_id,
+    comment_content,
+    to_user,
+    comment_id
+  })
+}
