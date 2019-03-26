@@ -2,8 +2,8 @@ import { doRegister, doLogin } from '~/api'
 
 export const state = () => ({
   showLoginModal: false,
-  showSignUpModal: false
-  // userInfo: JSON.parse(localStorage.getItem('userInfo'))
+  showSignUpModal: false,
+  userInfo: {}
 })
 
 export const mutations = {
@@ -20,7 +20,7 @@ export const mutations = {
     state.showSignUpModal = false
   },
   saveUserInfo(state, data) {
-    // state.userInfo = data
+    state.userInfo = data
     localStorage.setItem('userInfo', JSON.stringify(data))
   }
 }

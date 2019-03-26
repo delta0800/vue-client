@@ -243,8 +243,24 @@ header {
     transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
   }
 }
+.el-main::before {
+  content: '';
+  display: table;
+}
+.el-main::after {
+  clear: both;
+}
 .content-wrapper {
   height: calc(100vh - 80px);
   overflow: auto;
+  @media only screen and (max-width: 768px) {
+    .content-wrapper-inner {
+      padding: 0 20px !important;
+    }
+  }
+  .content-wrapper-inner {
+    position: relative;
+    padding: 0 300px 40px 40px;
+  }
 }
 </style>

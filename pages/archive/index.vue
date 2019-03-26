@@ -1,6 +1,6 @@
 <template>
   <div
-    class="archive">
+    class="content-wrapper-inner archive">
     <el-timeline>
       <el-timeline-item
         v-for="(item, index) in asyncData"
@@ -30,8 +30,4 @@ export default {
 </script>
 
 <style>
-.archive {
-  width: 70%;
-  margin: 0 auto;
-}
 </style>

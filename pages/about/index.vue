@@ -1,5 +1,5 @@
 <template>
-  <div class="about">
+  <div class="content-wrapper-inner about">
     <span class="avatar">
       <img
         src="/img/avatar.jpeg"
@@ -117,14 +117,7 @@ export default {
 </script>
 
 <style lang="less">
-@media only screen and (max-width: 768px) {
-  .about {
-    padding: 0 20px !important;
-  }
-}
 .about {
-  position: relative;
-  padding: 0 300px 40px 40px;
   .avatar {
     img {
       width: 32px;

@@ -1,5 +1,5 @@
 <template>
-  <div class="post">
+  <div class="content-wrapper-inner post">
     <div class="post-cont">
       <p class="post-title">{{ postData.title }}</p>
       <div class="info-row action-row">
@@ -128,13 +128,7 @@ export default {
 </script>
 
 <style lang="less">
-@media only screen and (max-width: 768px) {
-  .post {
-    padding: 0 20px !important;
-  }
-}
 .post {
-  padding: 0 300px 40px 40px;
   .right-navigation {
     border-left: 2px solid #ccc;
     padding-left: 15px;

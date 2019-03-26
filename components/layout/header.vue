@@ -65,14 +65,19 @@
                 </form>
               </li> -->
               <li class="nav-main">
-                <el-button
-                  size="small"
-                  type="primary"
-                  @click="handleLogin">登录</el-button>
-                <el-button
-                  size="small"
-                  type="default"
-                  @click="handleSignUp">注册</el-button>
+                <template v-if="!userName">
+                  <el-button
+                    size="small"
+                    type="primary"
+                    @click="handleLogin">登录</el-button>
+                  <el-button
+                    size="small"
+                    type="default"
+                    @click="handleSignUp">注册</el-button>
+                </template>
+                <template v-else>
+                  <span>欢迎，{{ userName }}</span>
+                </template>
               </li>
             </ul>
           </div>
@@ -127,6 +132,9 @@ export default {
       const routes = ['/home', '/archive', '/category', '/about']
       const { fullPath } = this.$route
       return '' + (routes.indexOf(fullPath) + 1)
+    },
+    userName() {
+      return this.$store.state.user.userInfo.name
     }
   },
   methods: {
