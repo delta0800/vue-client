@@ -2,6 +2,9 @@ import axios from 'axios'
 import querystring from 'querystring'
 
 const defaultOptions = {}
+if (process.env.NODE_ENV === 'development') {
+  defaultOptions.baseURL = '/api'
+}
 if (process.server) {
   defaultOptions.baseURL = `http://${process.env.HOST || 'localhost'}:${process
     .env.PORT || 4000}`
