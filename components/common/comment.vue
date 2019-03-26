@@ -172,7 +172,7 @@ export default {
                 name: item.user.name,
                 avatar: item.user.avatar
               }),
-              user_id: this.$store.state.user.userInfo.user_id
+              user_id: this.$store.state.user.userInfo._id
             }
           })
           .then(result => {
@@ -191,11 +191,12 @@ export default {
             }
           })
       } else {
+        console.log(this.$store.state.user.userInfo.user_id)
         this.$store
           .dispatch({
             type: 'comment/addComment',
             payload: {
-              user_id: this.$store.state.user.userInfo.user_id,
+              user_id: this.$store.state.user.userInfo._id,
               article_id: this.$route.params.id,
               comment_content: this.inputComment
             }
