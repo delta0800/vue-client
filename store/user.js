@@ -20,8 +20,9 @@ export const mutations = {
     state.showSignUpModal = false
   },
   saveUserInfo(state, data) {
+    console.log(data)
     state.userInfo = data
-    localStorage.setItem('userInfo', JSON.stringify(data))
+    // localStorage.setItem('userInfo', JSON.stringify(data))
   }
 }
 

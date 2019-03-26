@@ -20,20 +20,11 @@ export const mutations = {
     state.userInfo = data
   }
 }
-function cookieToJson(cookie) {
-  let cookieArr = cookie.split(';')
-  let obj = {}
-  cookieArr.forEach(i => {
-    let arr = i.indexOf('=')
-    obj[i.substring(1, arr)] = i.substring(arr + 1)
-  })
-  return obj
-}
+
 export const actions = {
   nuxtServerInit({ commit }, ctx) {
-    const cookie = cookieToJson(ctx.req.headers.cookie)
-    if (cookie['koa:sess']) {
-      commit('user', cookie['koa:sess'])
+    if (ctx.req.session.userInfo) {
+      commit('user/saveUserInfo', ctx.req.session.userInfo)
     }
   }
 }

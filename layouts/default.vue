@@ -167,19 +167,28 @@ export default {
       this.toOpenSignUpModal()
     },
     handleLoginModalConfirm() {
-      this.$store
-        .dispatch({
-          type: 'user/login',
-          payload: this.form
-        })
-        .then(result => {
-          if (result.data.code === 0) {
-            this.$message.success('登录成功')
-            this.handleLoginModalClose()
-          } else {
-            this.$message.error(result.data.msg)
-          }
-        })
+      // this.$store
+      //   .dispatch({
+      //     type: 'user/login',
+      //     payload: this.form
+      //   })
+      //   .then(result => {
+      //     if (result.data.code === 0) {
+      //       this.$message.success('登录成功')
+      //       this.handleLoginModalClose()
+      //     } else {
+      //       this.$message.error(result.data.msg)
+      //     }
+      //   })
+      this.$axios.$post('/api/user/login', this.form).then(result => {
+        if (result.code === 0) {
+          this.$store.commit('user/saveUserInfo', result.data)
+          this.$message.success('登录成功')
+          this.handleLoginModalClose()
+        } else {
+          this.$message.error(result.msg)
+        }
+      })
     },
     handleSignUpModalConfirm() {
       this.$store
