@@ -189,7 +189,7 @@ export default {
                 name: item.user.name,
                 avatar: item.user.avatar
               }),
-              user_id: this.$store.state.user.userInfo._id
+              user_id: this.$store.state.user.user.userInfo._id
             }
           })
           .then(result => {
