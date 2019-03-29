@@ -7,7 +7,7 @@ if (process.server) {
   defaultOptions.baseURL = `http://${process.env.HOST || 'localhost'}:${process
     .env.PORT || 4000}`
 }
-console.log(defaultOptions.baseURL)
+
 const ax = axios.create(defaultOptions)
 // 拦截器
 ax.interceptors.request.use(

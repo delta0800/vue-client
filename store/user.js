@@ -3,7 +3,11 @@ import { doRegister, doLogin } from '~/api'
 export const state = () => ({
   showLoginModal: false,
   showSignUpModal: false,
-  userInfo: {}
+  user: {
+    userInfo: {
+      name: ''
+    }
+  }
 })
 
 export const mutations = {
@@ -19,9 +23,9 @@ export const mutations = {
   toCloseSignUpModal(state) {
     state.showSignUpModal = false
   },
-  saveUserInfo(state, data) {
+  saveUser(state, data) {
     console.log(data)
-    state.userInfo = data
+    state.user = data
     // localStorage.setItem('userInfo', JSON.stringify(data))
   }
 }
@@ -32,7 +36,7 @@ export const actions = {
   },
   async login({ commit }, { payload }) {
     const userInfo = await doLogin(payload)
-    commit('saveUserInfo', userInfo.data.data)
+    commit('saveUser', userInfo.data.data)
     return userInfo
   }
 }

@@ -14,7 +14,7 @@ app.use(
     secret: 'super-secret-key',
     resave: false,
     saveUninitialized: false,
-    cookie: { maxAge: 60000 }
+    cookie: { maxAge: 60000 * 60 }
   })
 )
 // Import and Set Nuxt.js options
@@ -28,10 +28,31 @@ async function start() {
   app.post('/api/user/login', function(req, res) {
     axios.post('http://localhost:4000/user/login', req.body).then(result => {
       if (result.status === 200) {
-        req.session.userInfo = result.data.data
+        req.session.user = result.data.data
         res.status(result.status).json(result.data)
       }
     })
+  })
+
+  app.get('/api/user/logout', function(req, res) {
+    try {
+      req.session.user = null
+      res.status(200).json({
+        code: 0,
+        msg: '请求成功',
+        data: {
+          message: '退出成功'
+        }
+      })
+    } catch (e) {
+      res.status(200).json({
+        code: -1,
+        msg: '请求成功',
+        data: {
+          message: '退出失败'
+        }
+      })
+    }
   })
 
   // Build only in dev mode

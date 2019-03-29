@@ -32,7 +32,7 @@
           height="36">
         <div class="right">
           <div class="name">{{ item.user.name }}</div>
-          <div class="date">{{ item.create_time }}</div>
+          <div class="date">{{ new Date(item.create_time).toLocaleString() }}</div>
         </div>
       </div>
       <div class="content">{{ item.content }}</div>
@@ -62,7 +62,7 @@
             <span>{{ reply.content }}</span>
           </div>
           <div class="reply-bottom">
-            <span>{{ reply.create_time }}</span>
+            <span>{{ new Date(reply.create_time).toLocaleString() }}</span>
             <span
               class="reply-text"
               @click="showCommentInput(item, reply)">
@@ -107,7 +107,7 @@
 </template>
 
 <script>
-import Vue from 'vue'
+import { mapMutations } from 'vuex'
 
 export default {
   components: {},
@@ -131,12 +131,16 @@ export default {
     console.log(this.$store.state)
   },
   methods: {
+    ...mapMutations({
+      toCloseLoginModal: 'user/toCloseLoginModal',
+      toOpenLoginModal: 'user/toOpenLoginModal'
+    }),
     /**
      * 点赞
      */
     likeClick(item) {
       if (item.isLike === null) {
-        Vue.$set(item, 'isLike', true)
+        this.$set(item, 'isLike', true)
         item.likeNum++
       } else {
         if (item.isLike) {
@@ -159,6 +163,19 @@ export default {
      * 提交评论
      */
     commitComment(item, reply) {
+      if (!this.$store.state.user.user.userInfo._id) {
+        return this.$confirm('登录后才可以评论哦', '提示', {
+          confirmButtonText: '去登陆',
+          cancelButtonText: '暂时不',
+          type: 'warning'
+        })
+          .then(() => {
+            this.toOpenLoginModal()
+          })
+          .catch(action => {
+            console.log(action)
+          })
+      }
       if (reply) {
         this.$store
           .dispatch({
@@ -172,7 +189,7 @@ export default {
                 name: item.user.name,
                 avatar: item.user.avatar
               }),
-              user_id: this.$store.state.user.userInfo._id
+              user_id: this.$store.state.user.userInfo.user._id
             }
           })
           .then(result => {
@@ -191,12 +208,12 @@ export default {
             }
           })
       } else {
-        console.log(this.$store.state.user.userInfo.user_id)
+        console.log(this.$store.state.user.user)
         this.$store
           .dispatch({
             type: 'comment/addComment',
             payload: {
-              user_id: this.$store.state.user.userInfo._id,
+              user_id: this.$store.state.user.user.userInfo._id,
               article_id: this.$route.params.id,
               comment_content: this.inputComment
             }

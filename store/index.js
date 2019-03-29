@@ -23,8 +23,9 @@ export const mutations = {
 
 export const actions = {
   nuxtServerInit({ commit }, ctx) {
-    if (ctx.req.session.userInfo) {
-      commit('user/saveUserInfo', ctx.req.session.userInfo)
+    console.log(ctx.req.session.user)
+    if (ctx.req.session.user) {
+      commit('user/saveUser', ctx.req.session.user)
     }
   }
 }

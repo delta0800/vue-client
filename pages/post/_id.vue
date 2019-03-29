@@ -122,6 +122,12 @@ export default {
         cancelButtonText: '暂时不',
         type: 'warning'
       })
+        .then(() => {
+          this.$store.commit('user/toOpenLoginModal')
+        })
+        .catch(action => {
+          console.log(action)
+        })
     }
   }
 }

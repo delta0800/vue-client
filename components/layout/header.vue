@@ -77,6 +77,9 @@
                 </template>
                 <template v-else>
                   <span>欢迎，{{ userName }}</span>
+                  <el-button
+                    type="text"
+                    @click="handleLogout">登出</el-button>
                 </template>
               </li>
             </ul>
@@ -134,7 +137,7 @@ export default {
       return '' + (routes.indexOf(fullPath) + 1)
     },
     userName() {
-      return this.$store.state.user.userInfo.name
+      return this.$store.state.user.user.userInfo.name || ''
     }
   },
   methods: {
@@ -162,6 +165,20 @@ export default {
     },
     handleLogin() {
       this.$store.commit('user/toOpenLoginModal')
+    },
+    handleLogout() {
+      this.$axios.get('/api/user/logout').then(res => {
+        const { data } = res
+        if (data.code === 0) {
+          this.$message({
+            type: 'success',
+            message: data.data.message,
+            onClose: () => {
+              window.location.reload()
+            }
+          })
+        }
+      })
     }
   }
 }

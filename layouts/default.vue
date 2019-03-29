@@ -182,7 +182,7 @@ export default {
       //   })
       this.$axios.$post('/api/user/login', this.form).then(result => {
         if (result.code === 0) {
-          this.$store.commit('user/saveUserInfo', result.data)
+          this.$store.commit('user/saveUser', result.data)
           this.$message.success('登录成功')
           this.handleLoginModalClose()
         } else {

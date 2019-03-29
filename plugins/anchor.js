@@ -3,7 +3,7 @@ import Vue from 'vue'
 const anchor = {
   inserted: function(el, binding) {
     el.onclick = function() {
-      let total = document.getElementById(`${binding.value}`).offsetTop - 80
+      let total = document.getElementById(`${binding.value}`).offsetTop
       let distance = document.getElementsByClassName('content-wrapper')[0]
         .scrollTop
       let step = total / 100
