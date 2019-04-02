@@ -3,6 +3,10 @@
     class="content-wrapper-inner archive">
     <el-timeline>
       <el-timeline-item
+        placement="top">
+        <span style="font-weight: bold; position: relative; top: -16px;;">Nice! {{ asyncData.length }} posts in total. Keep on posting.</span>
+      </el-timeline-item>
+      <el-timeline-item
         v-for="(item, index) in asyncData"
         :key="index"
         :timestamp="new Date(item.create_at).toLocaleString()"
