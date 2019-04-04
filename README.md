@@ -1,7 +1,10 @@
 ## 前言
 
 公司技术栈是Vue，平时写业务的时候Vue居多，所以比较熟悉，刚好要搭建自己的博客，为了便于SEO，所以博客前端部分使用了 `Nuxt` 进行服务器渲染。再加上`Element-ui` 这样的ui框架，目的也是为了将平时使用的Vue相关知识点串联起来，再最后做一次总结和复盘。
-在业余时间学习了`react`，被其深深吸引，想着写点什么东西检验一下自己学到的知识，索性使用`react`框架搭建博客的后台管理系统，ui框架使用了`antd`，脚手架则为很强大的`umi`(强烈推荐)。所有api都放在了`koa2-api`这个项目当中，下面会提到。
+
+在业余时间学习了`react`，被其深深吸引，想着写点什么东西检验一下自己学到的知识，索性使用`react`框架搭建博客的后台管理系统，ui框架使用了`antd`，脚手架则为很强大的`umi`(强烈推荐)。
+
+所有api都放在了`koa2-api`这个项目当中，下面会提到。
 
 [![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://opensource.org/licenses/mit-license.php)
 [![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu)
